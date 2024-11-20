@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <title>El Gato Con Botas - Cuentos Interactivos</title>
+    <style>
+      @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-20px); }
+      }
+
+      @keyframes sparkle {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.5; }
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background: linear-gradient(180deg, #fff7ed 0%, #ffedd5 100%);
+        font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      }
+
+      .header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        padding: 1rem;
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(8px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 2px 4px rgba(249, 115, 22, 0.1);
+      }
+
+      .header h1 {
+        color: #9a3412;
+        margin: 0;
+        font-size: 1.5rem;
+      }
+
+      .sparkles {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+      }
+
+      .sparkle {
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background: #fb923c;
+      }
+
+      .sparkle:nth-child(1) {
+        top: 20%;
+        left: 20%;
+        animation: sparkle 3s ease-in-out infinite;
+      }
+
+      .sparkle:nth-child(2) {
+        top: 30%;
+        right: 30%;
+        animation: sparkle 4s ease-in-out infinite;
+      }
+
+      .sparkle:nth-child(3) {
+        bottom: 25%;
+        left: 40%;
+        animation: sparkle 5s ease-in-out infinite;
+      }
+
+      diplomat-chat {
+        --diplomat-primary-color: #f97316;
+        --diplomat-secondary-color: #fff;
+        --diplomat-text-color: #1f2937;
+        --diplomat-input-text-color: #1f2937;
+        --diplomat-scroll-color: rgba(249, 115, 22, 0.5);
+        --diplomat-msg-logo-color: #fff;
+        --diplomat-contrast-color: #f97316;
+        --diplomat-text-contrast-color: #fff;
+        --diplomat-error-color: #E02424;
+        --diplomat-input-highlight-color: #f97316;
+        --diplomat-action-color: #f97316;
+        --diplomat-input-outline-color: #fdba74;
+        --diplomat-blur-color: rgba(249, 115, 22, 0.1);
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <h1>✨ El Gato Con Botas ✨</h1>
+    </header>
+
+    <div class="sparkles">
+      <div class="sparkle"></div>
+      <div class="sparkle"></div>
+      <div class="sparkle"></div>
+    </div>
+
+    <script type="module">
+      import Diplomat from 'https://cdn.diplomat.bot/prod/embed/diplomat.js';
+
+      Diplomat.init({
+        experienceId: 'cm3q8noj80003nu7mg3iuyv70',
+        theme: {
+          inputPlaceholder: '¿Qué quieres decirle al gato con botas?',
+          logo: 'https://elgatoconbotas.com/favicon.png',
+          colors: {
+            primary: '#f97316',
+            secondary: '#fff',
+            text: '#1f2937',
+            textInput: '#1f2937',
+            scroll: 'rgba(249, 115, 22, 0.5)',
+            msgLogo: '#fff',
+            contrast: '#f97316',
+            textContrast: '#fff',
+            error: '#E02424',
+            inputHighlight: '#f97316',
+            action: '#f97316',
+            inputOutline: '#fdba74',
+            blur: 'rgba(249, 115, 22, 0.1)',
+          },
+          font: [
+            {
+              src: 'https://fonts.googleapis.com/css2?family=Baloo+2&display=swap',
+              weight: '400',
+              style: 'normal',
+            },
+            {
+              src: 'https://fonts.googleapis.com/css2?family=Baloo+2:wght@800&display=swap',
+              weight: '800',
+              style: 'normal',
+            }
+          ],
+        },
+      });
+    </script>
+    <diplomat-chat />
+  </body>
+</html>
