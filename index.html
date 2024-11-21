@@ -9,6 +9,9 @@
         body {
           margin: 0;
           background: #FDF4CD;
+          min-height: 100vh;
+          position: relative;
+          overflow-x: hidden;
         }
     
         .header {
@@ -16,95 +19,148 @@
           top: 0;
           left: 0;
           right: 0;
-          padding: 1rem 2rem;
+          padding: 1rem;
           background: #FDF4CD;
           display: flex;
           justify-content: center;
-          align-items: center;
           z-index: 1000;
-          /* Removed the box-shadow and border */
         }
-    
-        .logo-container {
-          position: relative;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 1rem;
-          padding: 0.75rem 2rem;
-          max-width: 1200px;
-          width: 100%;
+
+        /* Add a subtle shadow effect to the header */
+        .header::after {
+          content: '';
+          position: absolute;
+          bottom: -10px;
+          left: 0;
+          right: 0;
+          height: 10px;
+          background: linear-gradient(to bottom, rgba(249, 115, 22, 0.1), transparent);
         }
     
         .logo {
           height: 80px;
           width: auto;
           object-fit: contain;
-          transition: transform 0.3s ease;
+          transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-    
+
         .logo:hover {
-          transform: scale(1.05);
+          transform: scale(1.1) rotate(2deg);
         }
-    
-        /* Softer decorative elements that match the background better */
-        .header-decoration {
+
+        /* Decorative elements */
+        .decoration {
+          position: fixed;
+          pointer-events: none;
+          z-index: 1;
+        }
+
+        .paw-print {
+          position: absolute;
+          width: 20px;
+          height: 20px;
+          opacity: 0.15;
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23f97316'%3E%3Cpath d='M12 2C7.58 2 4 5.58 4 10c0 2.03.76 3.87 2 5.28V20c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-4.72c1.24-1.41 2-3.25 2-5.28 0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z'/%3E%3C/svg%3E");
+        }
+
+        .paw1 { top: 20%; left: 5%; transform: rotate(-15deg); }
+        .paw2 { top: 40%; right: 8%; transform: rotate(25deg); }
+        .paw3 { top: 60%; left: 12%; transform: rotate(-20deg); }
+        .paw4 { top: 75%; right: 15%; transform: rotate(15deg); }
+
+        .sparkle {
           position: absolute;
           width: 8px;
           height: 8px;
           background: #f97316;
           border-radius: 50%;
-          opacity: 0.4; /* Reduced opacity to be more subtle */
-          animation: sparkle 2s ease-in-out infinite;
+          opacity: 0;
+          animation: sparkle 3s ease-in-out infinite;
         }
-    
-        .decoration-left {
-          left: 10px;
-          top: 50%;
-        }
-    
-        .decoration-right {
-          right: 10px;
-          top: 50%;
-          animation-delay: 1s;
-        }
-    
+
+        .sparkle1 { top: 30%; left: 20%; animation-delay: 0s; }
+        .sparkle2 { top: 45%; right: 25%; animation-delay: 1s; }
+        .sparkle3 { top: 65%; left: 30%; animation-delay: 2s; }
+
         @keyframes sparkle {
-          0%, 100% { transform: scale(1); opacity: 0.4; }
-          50% { transform: scale(1.5); opacity: 0.6; }
+          0% { transform: scale(0); opacity: 0; }
+          50% { transform: scale(1); opacity: 0.3; }
+          100% { transform: scale(0); opacity: 0; }
+        }
+
+        diplomat-chat {
+          display: block;
+          margin-top: 140px;
+          position: relative;
+          z-index: 2;
         }
     
         @media (max-width: 768px) {
-          .header {
-            padding: 0.75rem 1rem;
+          .logo {
+            height: 60px;
           }
           
-          .logo-container {
-            padding: 0.5rem 1rem;
+          diplomat-chat {
+            margin-top: 160px;
           }
-    
-          .logo {
-            height: 65px;
+
+          .paw-print {
+            width: 15px;
+            height: 15px;
           }
         }
-    
-        /* Add smooth transition for content below header */
-        .content {
-          padding-top: 120px; /* Adjust based on header height */
-          background: #FDF4CD;
+        
+        @media (max-width: 480px) {
+          .logo {
+            height: 50px;
+          }
+          
+          diplomat-chat {
+            margin-top: 180px;
+          }
+        }
+
+        /* Add a subtle gradient background animation */
+        @keyframes gradientBG {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+
+        body::before {
+          content: '';
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: linear-gradient(45deg, 
+            rgba(249, 115, 22, 0.05) 0%,
+            rgba(253, 244, 205, 0) 50%,
+            rgba(249, 115, 22, 0.05) 100%
+          );
+          background-size: 200% 200%;
+          animation: gradientBG 15s ease infinite;
+          z-index: 0;
         }
       </style>
   </head>
   <body>
+    <!-- Decorative elements -->
+    <div class="decoration paw-print paw1"></div>
+    <div class="decoration paw-print paw2"></div>
+    <div class="decoration paw-print paw3"></div>
+    <div class="decoration paw-print paw4"></div>
+    
+    <div class="decoration sparkle sparkle1"></div>
+    <div class="decoration sparkle sparkle2"></div>
+    <div class="decoration sparkle sparkle3"></div>
+
     <header class="header">
       <img src="/logo-el-gato-con-botas.png" alt="El Gato Con Botas" class="logo">
     </header>
 
-    <div class="sparkles">
-      <div class="sparkle"></div>
-      <div class="sparkle"></div>
-      <div class="sparkle"></div>
-    </div>
+    <diplomat-chat />
 
     <script type="module">
       import Diplomat from 'https://cdn.diplomat.bot/prod/embed/diplomat.js';
@@ -144,6 +200,5 @@
         },
       });
     </script>
-    <diplomat-chat />
   </body>
 </html>
